@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Розгалужений обчислювальний процес</title>
+    <script>
+        function U(x) {
+            if (x < 0) {
+                return Math.sin(x) - Math.tan(x);
+            } else if (x === 0) {
+                return 0;
+            } else {
+                return Math.pow(1 / Math.tan(x), 3);
+            }
+        }
+
+        function computeValues() {
+            const start = parseFloat(document.getElementById("start").value);
+            const end = parseFloat(document.getElementById("end").value);
+            const step = parseFloat(document.getElementById("step").value);
+
+            let result = "<table border='1'><tr><th>x</th><th>U(x)</th></tr>";
+            for (let x = start; x <= end; x += step) {
+                const u = U(x);
+                result += `<tr><td>${x.toFixed(2)}</td><td>${u.toFixed(2)}</td></tr>`;
+            }
+            result += "</table>";
+
+            document.getElementById("results").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Розгалужений обчислювальний процес</h1>
+    <p>Введіть межі зміни значень аргументу x та крок зміни значень аргументу:</p>
+    <form>
+        <label for="start">Початок діапазону (start):</label>
+        <input type="number" id="start" step="any" value="-6"><br><br>
+        <label for="end">Кінець діапазону (end):</label>
+        <input type="number" id="end" step="any" value="6"><br><br>
+        <label for="step">Крок (step):</label>
+        <input type="number" id="step" step="any" value="2"><br><br>
+        <button type="button" onclick="computeValues()">Обчислити</button>
+    </form>
+    <div id="results"></div>
+</body>
+</html>
